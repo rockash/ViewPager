@@ -1,6 +1,7 @@
 package selfhelp.viewpager;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.view.PagerAdapter;
 import android.util.Log;
@@ -20,8 +21,8 @@ public class ImageAdapter extends PagerAdapter {
    Context context;
     private static final String TAG = "ImageAdapter";
     private static final boolean DEBUG = false;
-    private int mFakeCount = 0;
-    private int position;
+     int mFakeCount;
+
 
 
     int[] mResources = {
@@ -64,36 +65,38 @@ public class ImageAdapter extends PagerAdapter {
        // final int pos = Math.abs(position) % mResources.length;
 
         img.setImageResource(mResources[position]);
-        Log.d("imageloadcode","image load successful");
+       // Log.d("imageloadcode","image load successful");
         img.setScaleType(ImageView.ScaleType.FIT_XY);
         collection.addView(itemview);
-        Log.d("add images","added views to the container"+ position);
+       // Log.d("add images","added views to the container"+ position);
+        /*
         img.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View arg0) {
 
-                /*  BitmapFactory.Options options = new BitmapFactory.Options();
+                *//*  BitmapFactory.Options options = new BitmapFactory.Options();
                 options.inSampleSize = 4;
                 Bitmap preview_bitmap = BitmapFactory.decodeResource(context.getResources(),(Integer) root.getTag(), options);
 
-                 */
+                 *//*
 
                 Toast.makeText(context, "opens activity for position", Toast.LENGTH_SHORT).show();
 
-               /* Snackbar.make(view, "opens activity for position" +position, Snackbar.LENGTH_LONG)
+               *//* Snackbar.make(view, "opens activity for position" +position, Snackbar.LENGTH_LONG)
                         .setAction("Action", null)
                         .show();
+                *//*
 
 
-                Intent intent=new Intent(context,ActAtomicGodDetailDesc.class);
-                intent.putExtra("GOD_NAME", imgGodInfoId.getTag().toString());
-                intent.putExtra("GOD_IMAGE",(Integer) root.getTag());
+
+                Intent intent=new Intent(context,LoginActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                context.startActivity(intent);*/
+                context.startActivity(intent);
 
             }
         });
+        */
         return itemview;
 
         // do your layout inflating and what not here.
