@@ -113,6 +113,10 @@ public class UserSessionManager {
         editor.clear();
         editor.commit();
 
+        //redirect();
+
+    }
+    public void redirect(){
         // After logout redirect user to Login Activity
         Intent i = new Intent(_context, LoginActivity.class);
 
@@ -131,4 +135,5 @@ public class UserSessionManager {
     public boolean isUserLoggedIn(){
         return pref.getBoolean(IS_USER_LOGIN, false);
     }
+
 }

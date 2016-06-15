@@ -23,6 +23,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+        clearPreferences();
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
         // Session class instance
@@ -35,6 +36,7 @@ public class MainActivity extends AppCompatActivity {
                 "User Login Status: " + session.isUserLoggedIn(),
                 Toast.LENGTH_LONG).show();
 
+       /*
         pager.setOnClickListener(new View.OnClickListener() {
 
             @Override
@@ -45,6 +47,7 @@ public class MainActivity extends AppCompatActivity {
                 if(session.checkLogin())
                     finish();
 
+                *//*
                 // get user data from session
                 HashMap<String, String> user = session.getUserDetails();
 
@@ -54,9 +57,29 @@ public class MainActivity extends AppCompatActivity {
                 // get email
                 String email = user.get(UserSessionManager.KEY_EMAIL);
 
+                *//*
             }
         });
+        */
     }
+
+    @Override
+    protected void onDestroy() {
+        super.onDestroy();
+        session.logoutUser();
+    }
+    private void clearPreferences() {
+        try {
+            // clearing app data
+            Runtime runtime = Runtime.getRuntime();
+            runtime.exec("pm clear package selfhelp.viewpager");
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+    }
+
+
 /*
     public void select(int position) {
         pos = position % 10;
