@@ -12,7 +12,7 @@ import android.widget.Toast;
 
 public class LoginActivity extends Activity {
 
-    Button btnLogin;
+    Button btnLogin,btnSignup;
 
     EditText txtUsername, txtPassword;
 
@@ -39,6 +39,8 @@ public class LoginActivity extends Activity {
         // User Login button
         btnLogin = (Button) findViewById(R.id.btnLogin);
 
+        // User Signup button
+        btnSignup = (Button) findViewById(R.id.btnSignup);
 
         // Login button click event
         btnLogin.setOnClickListener(new View.OnClickListener() {
@@ -57,12 +59,12 @@ public class LoginActivity extends Activity {
                     // username = admin
                     // password = admin
 
-                    if(username.equals("admin") && password.equals("admin")){
+                    if(username.equals("admin") && password.equals("1234")){
 
                         // Creating user login session
                         // Statically storing name="Android Example"
                         // and email="androidexample84@gmail.com"
-                        session.createUserLoginSession("User Session ", "bamoyk@yahoo.com");
+                        session.createUserLoginSession("User Session ", "ashwin.pillai@siesgst.ac.in");
 
                         // Starting MainActivity
                         Intent i = new Intent(getApplicationContext(), MainActivity.class);
@@ -71,7 +73,6 @@ public class LoginActivity extends Activity {
                         // Add new Flag to start new Activity
                         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                         startActivity(i);
-
                         finish();
 
                     }else{
@@ -86,6 +87,15 @@ public class LoginActivity extends Activity {
                     Toast.makeText(getApplicationContext(), "Please enter username and password", Toast.LENGTH_LONG).show();
 
                 }
+
+            }
+        });
+        btnSignup.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent i = new Intent(getApplicationContext(), SignupActivity.class);
+                startActivity(i);
+                finish();
 
             }
         });

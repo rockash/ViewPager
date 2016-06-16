@@ -6,7 +6,6 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 import android.support.design.widget.Snackbar;
-import android.support.v4.app.Fragment;
 import android.support.v4.view.PagerAdapter;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -16,7 +15,6 @@ import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-import layout.Fragment1;
 
 /**
  * Created by Ashwin Pillai on 6/10/2016.
@@ -96,13 +94,8 @@ public class ImageAdapter extends PagerAdapter {
 
             @Override
             public void onClick(View arg0) {
-                 if(sessionobject.isUserLoggedIn()) {
-                    Intent intent = new Intent(context, Fragment1.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    context.startActivity(intent);
+                 //sessionobject.checkLogin();
 
-            }
-                else{
                    /*  BitmapFactory.Options options = new BitmapFactory.Options();
                 options.inSampleSize = 4;
                 Bitmap preview_bitmap = BitmapFactory.decodeResource(context.getResources(),(Integer) root.getTag(), options);
@@ -115,11 +108,11 @@ public class ImageAdapter extends PagerAdapter {
                             .setAction("Action", null)
                             .show();
 
-                    Intent intent = new Intent(context, LoginActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    context.startActivity(intent);
+                Intent intent = new Intent(context, LoginActivity.class);
+                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                context.startActivity(intent);
 
-                }
+
         }
         });
 

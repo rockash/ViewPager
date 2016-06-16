@@ -27,7 +27,7 @@ public class UserSessionManager {
     private static final String PREFER_NAME = "AndroidExamplePref";
 
     // All Shared Preferences Keys
-    private static final String IS_USER_LOGIN = "IsUserLoggedIn";
+    public static final String IS_USER_LOGIN = "IsUserLoggedIn";
 
     // User name (make variable public to access from outside)
     public static final String KEY_NAME = "name";

@@ -36,31 +36,6 @@ public class MainActivity extends AppCompatActivity {
                 "User Login Status: " + session.isUserLoggedIn(),
                 Toast.LENGTH_LONG).show();
 
-       /*
-        pager.setOnClickListener(new View.OnClickListener() {
-
-            @Override
-            public void onClick(View arg0) {
-                Log.d("login status","login status "+session.isUserLoggedIn());
-                // Check user login
-                // If User is not logged in , This will redirect user to LoginActivity.
-                if(session.checkLogin())
-                    finish();
-
-                *//*
-                // get user data from session
-                HashMap<String, String> user = session.getUserDetails();
-
-                // get name
-                String name = user.get(UserSessionManager.KEY_NAME);
-
-                // get email
-                String email = user.get(UserSessionManager.KEY_EMAIL);
-
-                *//*
-            }
-        });
-        */
     }
 
     @Override

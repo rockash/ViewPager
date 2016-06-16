@@ -6,34 +6,35 @@
     android:background="@color/background_floating_material_light"
     android:padding="10dip">
 
-    <TextView
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="Username (Enter 'admin')"
-        android:textColor="@color/background_material_dark"
-        android:textColorHighlight="@color/material_deep_teal_500"
-        android:singleLine="true"
-        android:layout_marginBottom="5dip"/>
 
-    <EditText
-        android:id="@+id/txtUsername"
-        android:hint="Enter User Name"
+    <EditText android:id="@+id/txtFirstName"
         android:layout_width="fill_parent"
         android:textColor="@color/background_material_dark"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dip"/>
 
-    <TextView
+    <EditText android:id="@+id/txtLastName"
         android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="Password (Enter '1234')"
         android:textColor="@color/background_material_dark"
-        android:textColorHighlight="@color/material_deep_teal_500"
-        android:layout_marginBottom="5dip"/>
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dip"/>
 
-    <EditText
-        android:id="@+id/txtPassword"
-        android:hint="Enter Password"
+    <EditText android:id="@+id/txtPhone"
+        android:layout_width="fill_parent"
+        android:inputType="phone"
+        android:textColor="@color/background_material_dark"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dip"/>
+
+    <EditText android:id="@+id/txtEmail"
+        android:layout_width="fill_parent"
+        android:inputType="textEmailAddress"
+        android:textColor="@color/background_material_dark"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="10dip"/>
+
+
+    <EditText android:id="@+id/txtPassword"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:textColor="@color/background_material_dark"
@@ -41,10 +42,6 @@
         android:inputType="numberPassword"
         android:singleLine="true"/>
 
-    <Button android:id="@+id/btnLogin"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:text="Login"/>
 
     <Button android:id="@+id/btnSignup"
         android:layout_width="fill_parent"
