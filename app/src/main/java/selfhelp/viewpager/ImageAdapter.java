@@ -129,7 +129,7 @@ public class ImageAdapter extends PagerAdapter {
                 */
 
                       //if else cases for if user logged in and needs login page redirect
-                if (sessionobject.isUserLoggedIn()) {
+                if (!sessionobject.isUserLoggedIn()) {
                     Intent intent = new Intent(context, LoginActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     context.startActivity(intent);

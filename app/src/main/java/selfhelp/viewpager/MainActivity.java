@@ -84,8 +84,7 @@ public class MainActivity extends AppCompatActivity{
         int pageCount = 12;
 
         if (position == pageCount - 1) {
-            pager.setCurrentItem(1, false);
-        }
+            pager.setCurrentItem(1, false);        }
         if (position == 0) {
             pager.setCurrentItem(pageCount - 2, false);
         }
