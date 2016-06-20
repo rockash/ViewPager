@@ -2,10 +2,6 @@ package selfhelp.viewpager;
 
 import android.content.Context;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.os.Bundle;
-import android.support.design.widget.Snackbar;
 import android.support.v4.view.PagerAdapter;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -24,7 +20,7 @@ import android.widget.Toast;
 public class ImageAdapter extends PagerAdapter {
     LoginActivity loginobject;
     UserSessionManager sessionobject;
-   Context context;
+    Context context;
     private static final String TAG = "ImageAdapter";
     private static final boolean DEBUG = false;
      int mFakeCount;
@@ -47,11 +43,14 @@ public class ImageAdapter extends PagerAdapter {
     public ImageAdapter(Context mContext) {
          mFakeCount = mResources.length;
         context = mContext;
+        sessionobject=new UserSessionManager(mContext);
     }
     @Override
     public int getCount() {
         return Integer.MAX_VALUE;
     }
+
+
 
     @Override
     public Object instantiateItem(ViewGroup collection,  int position) {
@@ -90,11 +89,23 @@ public class ImageAdapter extends PagerAdapter {
         });*/
        // Log.d("add images","added views to the container"+ position);
 
+        final int finalPosition = position;
         img.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View arg0) {
-                 //sessionobject.checkLogin();
+            /*    if(!sessionobject.isUserLoggedIn()){
+                    // user is not logged in redirect him to Login Activity
+                    Intent i = new Intent(context, testactivity.class);
+                    // Closing all the Activities
+                    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+                    // Add new Flag to start new Activity
+                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    // Staring Login Activity
+                    context.startActivity(i);
+                }
+*/
+
 
                    /*  BitmapFactory.Options options = new BitmapFactory.Options();
                 options.inSampleSize = 4;
@@ -102,20 +113,39 @@ public class ImageAdapter extends PagerAdapter {
 
                  */
 
-                    // Toast.makeText(context, "opens activity for position"+pos, Toast.LENGTH_SHORT).show();
+                /*
 
-                    Snackbar.make(arg0, "opens activity for position" + pos, Snackbar.LENGTH_SHORT)
-                            .setAction("Action", null)
-                            .show();
+                Toast.makeText(context, "opens activity for position"+pos, Toast.LENGTH_SHORT).show();
+
+                Snackbar.make(arg0, "opens activity for position" + pos, Snackbar.LENGTH_SHORT)
+                        .setAction("Action", null)
+                        .show();
+
 
                 Intent intent = new Intent(context, LoginActivity.class);
                 intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                 context.startActivity(intent);
 
+                */
 
-        }
+                      //if else cases for if user logged in and needs login page redirect
+                if (sessionobject.isUserLoggedIn()) {
+                    Intent intent = new Intent(context, LoginActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    context.startActivity(intent);
+                }
+                    else {
+                    Intent intent = new Intent(context, testactivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    context.startActivity(intent);
+
+                         }
+
+
+
+                }
+
         });
-
 
         return itemview;
         }
@@ -130,6 +160,7 @@ public class ImageAdapter extends PagerAdapter {
 
         return view == object;
     }
+
     int setPageMargin (int marginPixels){
         marginPixels = 0;
         return marginPixels;
@@ -148,6 +179,5 @@ public class ImageAdapter extends PagerAdapter {
             Log.d(TAG, message);
         }
     }
-
 
 }

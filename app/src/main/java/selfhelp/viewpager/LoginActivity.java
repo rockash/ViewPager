@@ -25,7 +25,7 @@ public class LoginActivity extends Activity {
         setContentView(R.layout.activity_login);
 
         // User Session Manager
-        session = new UserSessionManager(getApplicationContext());
+        session = new UserSessionManager(LoginActivity.this);
 
         // get Email, Password input text
         txtUsername = (EditText) findViewById(R.id.txtUsername);
@@ -64,10 +64,10 @@ public class LoginActivity extends Activity {
                         // Creating user login session
                         // Statically storing name="Android Example"
                         // and email="androidexample84@gmail.com"
-                        session.createUserLoginSession("User Session ", "ashwin.pillai@siesgst.ac.in");
+                        session.createUserLoginSession(username, password);
 
                         // Starting MainActivity
-                        Intent i = new Intent(getApplicationContext(), MainActivity.class);
+                        Intent i = new Intent(LoginActivity.this, MainActivity.class);
                         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
                         // Add new Flag to start new Activity

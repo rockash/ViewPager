@@ -30,8 +30,14 @@
         </activity>
         <activity
             android:name=".SignupActivity"
-            android:label="@string/title_activity_login">
-         </activity>
+            android:label="@string/title_activity_login"></activity>
+        <activity
+            android:name=".testactivity"
+            android:label="@string/title_activity_testactivity"
+            android:parentActivityName=".MainActivity"
+            android:theme="@style/Theme.AppCompat.NoActionBar">
+
+        </activity>
     </application>
 
 </manifest>

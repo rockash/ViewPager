@@ -18,7 +18,7 @@ public class UserSessionManager {
     SharedPreferences.Editor editor;
 
     // Context
-    Context _context;
+    Context context;
 
     // Shared pref mode
     int PRIVATE_MODE = 0;
@@ -37,8 +37,10 @@ public class UserSessionManager {
 
     // Constructor
     public UserSessionManager(Context context){
-        this._context = context;
-        pref = _context.getSharedPreferences(PREFER_NAME, PRIVATE_MODE);
+
+
+        this.context = context;
+        pref = context.getSharedPreferences(PREFER_NAME, PRIVATE_MODE);
         editor = pref.edit();
     }
 
@@ -67,7 +69,7 @@ public class UserSessionManager {
         if(!this.isUserLoggedIn()){
 
             // user is not logged in redirect him to Login Activity
-            Intent i = new Intent(_context, LoginActivity.class);
+            Intent i = new Intent(context, LoginActivity.class);
 
             // Closing all the Activities from stack
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -76,7 +78,7 @@ public class UserSessionManager {
             i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
             // Staring Login Activity
-            _context.startActivity(i);
+            context.startActivity(i);
 
             return true;
         }
@@ -118,7 +120,7 @@ public class UserSessionManager {
     }
     public void redirect(){
         // After logout redirect user to Login Activity
-        Intent i = new Intent(_context, LoginActivity.class);
+        Intent i = new Intent(context, LoginActivity.class);
 
         // Closing all the Activities
         i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -127,7 +129,7 @@ public class UserSessionManager {
         i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
 
         // Staring Login Activity
-        _context.startActivity(i);
+        context.startActivity(i);
     }
 
 

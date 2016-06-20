@@ -22,27 +22,27 @@
                    android:layout_width="wrap_content"
                    android:layout_height="fill_parent"
                    android:layout_gravity="center_horizontal"
-                   android:background="@android:color/transparent"
                    android:clickable="true"/>
 
            </LinearLayout>
        </FrameLayout>
            <ImageView
                android:layout_width="match_parent"
-               android:layout_height="108dp"
+               android:layout_height="110dp"
                android:src="@drawable/topbanner"
                android:id="@+id/imageView1"
                android:layout_alignParentTop="true"
                android:scaleType="fitXY"
+
                />
            <ImageView
                android:layout_width="match_parent"
-               android:layout_height="170dp"
+               android:layout_height="150dp"
                android:src="@drawable/bottombanner"
                android:id="@+id/imageView2"
                android:layout_alignParentBottom="true"
                android:scaleType="fitXY"
+
+
                />
-
-
 </RelativeLayout>

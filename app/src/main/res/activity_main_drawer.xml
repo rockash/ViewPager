@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <group android:checkableBehavior="single">
+        <item
+            android:id="@+id/home"
+            android:icon="@drawable/ic_menu_camera"
+            android:title="Home" />
+        <item
+            android:id="@+id/pre_registration"
+            android:icon="@drawable/ic_menu_gallery"
+            android:title="Pre-Registration" />
+        <item
+            android:id="@+id/find_a_doctor"
+            android:icon="@drawable/ic_menu_slideshow"
+            android:title="Find A Doctor" />
+        <item
+            android:id="@+id/book_an_appointment"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Book An Appointment" />
+        <item
+            android:id="@+id/book_a_health_package"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Book A Health Package" />
+        <item
+            android:id="@+id/my_appointments"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="My Appointments" />
+        <item
+            android:id="@+id/check_your_profile"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Check Your Profile" />
+        <item
+            android:id="@+id/how_to_reach"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="How To Reach" />
+        <item
+            android:id="@+id/about_hospital"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="About Hospital" />
+        <item
+            android:id="@+id/news"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="News" />
+        <item
+            android:id="@+id/feedback"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="Feedback" />
+        <item
+            android:id="@+id/faq"
+            android:icon="@drawable/ic_menu_manage"
+            android:title="FAQ" />
+    </group>
+
+</menu>

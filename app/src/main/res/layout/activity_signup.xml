@@ -3,48 +3,99 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
-    android:background="@color/background_floating_material_light"
     android:padding="10dip">
 
+<ImageView
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:src="@drawable/profile_user_new"
+    android:layout_gravity="center_horizontal"
+    android:layout_marginTop="5dp"/>
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/FirstNameWrapper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+         android:layout_marginTop="4dp">
 
     <EditText android:id="@+id/txtFirstName"
         android:layout_width="fill_parent"
+        android:hint="   First Name"
+        android:drawableLeft="@drawable/profile_icon"
         android:textColor="@color/background_material_dark"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dip"/>
+        android:layout_marginBottom="10dp"/>
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/LastNameWrapper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp">
 
     <EditText android:id="@+id/txtLastName"
         android:layout_width="fill_parent"
+        android:hint="   Last Name"
+        android:drawableLeft="@drawable/profile_icon"
         android:textColor="@color/background_material_dark"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dip"/>
+        android:layout_marginBottom="10dp"/>
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/PhoneWrapper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp">
 
     <EditText android:id="@+id/txtPhone"
         android:layout_width="fill_parent"
+        android:hint="    Phone number"
         android:inputType="phone"
+        android:drawableLeft="@drawable/mobile"
         android:textColor="@color/background_material_dark"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dip"/>
+        android:layout_marginBottom="10dp"/>
+
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/EmailWrapper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp">
 
     <EditText android:id="@+id/txtEmail"
         android:layout_width="fill_parent"
+        android:hint="Email ID"
         android:inputType="textEmailAddress"
         android:textColor="@color/background_material_dark"
         android:layout_height="wrap_content"
-        android:layout_marginBottom="10dip"/>
+        android:layout_marginBottom="10dp"/>
 
+    </android.support.design.widget.TextInputLayout>
+
+    <android.support.design.widget.TextInputLayout
+        android:id="@+id/PasswordWrapper"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp">
 
     <EditText android:id="@+id/txtPassword"
         android:layout_width="fill_parent"
+        android:hint="Password"
         android:layout_height="wrap_content"
         android:textColor="@color/background_material_dark"
-        android:layout_marginBottom="20dip"
+        android:layout_marginBottom="10dip"
         android:inputType="numberPassword"
         android:singleLine="true"/>
 
 
+    </android.support.design.widget.TextInputLayout>
     <Button android:id="@+id/btnSignup"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="Sign up"/>
+
 </LinearLayout>
