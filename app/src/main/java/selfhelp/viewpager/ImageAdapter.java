@@ -18,7 +18,7 @@ import android.widget.Toast;
 
 
 public class ImageAdapter extends PagerAdapter {
-    LoginActivity loginobject;
+
     UserSessionManager sessionobject;
     Context context;
     private static final String TAG = "ImageAdapter";
@@ -135,32 +135,46 @@ public class ImageAdapter extends PagerAdapter {
                     context.startActivity(intent);
                 }
                     else {
-                    Intent intent = new Intent(context, testactivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    context.startActivity(intent);
+                    switch (pos) {
+                        //TODO      cover all cases
+                        case 0:
 
-                         }
+                                    Intent intent = new Intent(context, testactivity.class);
+                                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            //custom constructor variable pass to testactivity
+                            //intent.putExtra("POSITION",0);
+                                    context.startActivity(intent);
+
+                                    break;
+
+                        case 1:     break;
+                        case 2:     break;
+                        case 3:     break;
+                        case 4:     break;
+                        case 5:     break;
+                        case 6:     break;
+                        case 7:     break;
+                        case 8:     break;
 
 
 
+                    }
+                }
                 }
 
         });
 
         return itemview;
         }
-
         // do your layout inflating and what not here.
         // position will now refer to a correct index into your mResources list
         // even if the user has paged so many times that the view has wrapped
-
 
     @Override
     public boolean isViewFromObject(View view, Object object) {
 
         return view == object;
     }
-
     int setPageMargin (int marginPixels){
         marginPixels = 0;
         return marginPixels;
@@ -170,6 +184,7 @@ public class ImageAdapter extends PagerAdapter {
     public void destroyItem(ViewGroup container, int position, Object object) {
         container.removeView((LinearLayout) object);
     }
+
     @Override public float getPageWidth(int position) {
         float nbPages = 3;          // You could display partial pages using a float value
         return (1 / nbPages);
@@ -179,5 +194,4 @@ public class ImageAdapter extends PagerAdapter {
             Log.d(TAG, message);
         }
     }
-
 }

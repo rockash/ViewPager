@@ -35,7 +35,7 @@
             android:name=".testactivity"
             android:label="@string/title_activity_testactivity"
             android:parentActivityName=".MainActivity"
-            android:theme="@style/Theme.AppCompat.NoActionBar">
+            android:theme="@style/Theme.AppCompat.Light.DarkActionBar">
 
         </activity>
     </application>
