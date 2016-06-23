@@ -1,5 +1,6 @@
 package selfhelp.viewpager;
 
+import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.v4.view.PagerAdapter;
@@ -23,9 +24,7 @@ public class ImageAdapter extends PagerAdapter {
     Context context;
     private static final String TAG = "ImageAdapter";
     private static final boolean DEBUG = false;
-     int mFakeCount;
-
-
+    int mFakeCount;
 
 
     int[] mResources = {
@@ -41,19 +40,19 @@ public class ImageAdapter extends PagerAdapter {
     };
 
     public ImageAdapter(Context mContext) {
-         mFakeCount = mResources.length;
+        mFakeCount = mResources.length;
         context = mContext;
-        sessionobject=new UserSessionManager(mContext);
+        sessionobject = new UserSessionManager(mContext);
     }
+
     @Override
     public int getCount() {
         return Integer.MAX_VALUE;
     }
 
 
-
     @Override
-    public Object instantiateItem(ViewGroup collection,  int position) {
+    public Object instantiateItem(ViewGroup collection, int position) {
         // make the size larger, and change the position
         // to trick viewpager into paging forever
         LayoutInflater mInflater = LayoutInflater.from(context);
@@ -62,16 +61,16 @@ public class ImageAdapter extends PagerAdapter {
         //Log.d(TAG,"view object created");
         ImageView img = (ImageView) itemview.findViewById(R.id.imageView);
         //Log.d(TAG,"imageview object created");
-         if (position >= mResources.length) {
+        if (position >= mResources.length) {
             int newPosition = Math.abs(position) % mResources.length;
             position = Math.abs(newPosition);
-             mFakeCount++ ;
+            mFakeCount++;
         }
 
-       final int pos = Math.abs(position) % mResources.length;
+        final int pos = Math.abs(position) % mResources.length;
 
         img.setImageResource(mResources[position]);
-       // Log.d("imageloadcode","image load successful");
+        // Log.d("imageloadcode","image load successful");
         img.setScaleType(ImageView.ScaleType.FIT_XY);
         collection.addView(itemview);
 
@@ -87,7 +86,7 @@ public class ImageAdapter extends PagerAdapter {
             }
 
         });*/
-       // Log.d("add images","added views to the container"+ position);
+        // Log.d("add images","added views to the container"+ position);
 
         final int finalPosition = position;
         img.setOnClickListener(new View.OnClickListener() {
@@ -128,54 +127,62 @@ public class ImageAdapter extends PagerAdapter {
 
                 */
 
-                      //if else cases for if user logged in and needs login page redirect
+                //if else cases for if user logged in and needs login page redirect
                 if (!sessionobject.isUserLoggedIn()) {
                     Intent intent = new Intent(context, LoginActivity.class);
                     intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                     context.startActivity(intent);
-                }
-                    else {
+                } else {
                     switch (pos) {
                         //TODO      cover all cases
                         case 0:
 
-                                    Intent intent = new Intent(context, testactivity.class);
-                                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            Intent intent = new Intent(context, testactivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            intent.putExtra("from", ""+pos);
                             //custom constructor variable pass to testactivity
                             //intent.putExtra("POSITION",0);
-                                    context.startActivity(intent);
+                            ((Activity)context).startActivity(intent);
 
-                                    break;
+                            break;
 
-                        case 1:     break;
-                        case 2:     break;
-                        case 3:     break;
-                        case 4:     break;
-                        case 5:     break;
-                        case 6:     break;
-                        case 7:     break;
-                        case 8:     break;
-
+                        case 1:
+                            break;
+                        case 2:
+                            break;
+                        case 3:
+                            break;
+                        case 4:
+                            break;
+                        case 5:
+                            break;
+                        case 6:
+                            break;
+                        case 7:
+                            break;
+                        case 8:
+                            break;
 
 
                     }
                 }
-                }
+            }
 
         });
 
         return itemview;
-        }
-        // do your layout inflating and what not here.
-        // position will now refer to a correct index into your mResources list
-        // even if the user has paged so many times that the view has wrapped
+    }
+    // do your layout inflating and what not here.
+    // position will now refer to a correct index into your mResources list
+    // even if the user has paged so many times that the view has wrapped
 
     @Override
     public boolean isViewFromObject(View view, Object object) {
 
         return view == object;
     }
-    int setPageMargin (int marginPixels){
+
+    int setPageMargin(int marginPixels) {
         marginPixels = 0;
         return marginPixels;
     }
@@ -185,10 +192,12 @@ public class ImageAdapter extends PagerAdapter {
         container.removeView((LinearLayout) object);
     }
 
-    @Override public float getPageWidth(int position) {
+    @Override
+    public float getPageWidth(int position) {
         float nbPages = 3;          // You could display partial pages using a float value
         return (1 / nbPages);
     }
+
     private void debug(String message) {
         if (DEBUG) {
             Log.d(TAG, message);

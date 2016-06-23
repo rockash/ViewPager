@@ -48,7 +48,6 @@
             android:title="Feedback" />
         <item
             android:id="@+id/faq"
-
             android:title="FAQ" />
     </group>
 

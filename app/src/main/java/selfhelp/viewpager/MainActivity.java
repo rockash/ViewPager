@@ -50,7 +50,7 @@ public class MainActivity extends AppCompatActivity{
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        session.logoutUser();
+        //session.logoutUser();
     }
     private void clearPreferences() {
         try {
