@@ -32,7 +32,7 @@ import static selfhelp.viewpager.R.id.dateofbirth_enter;
 public class pre_registration_frag extends Fragment implements View.OnClickListener {
     String LOG = "pre_registration_frag";
     Fragment fragment;
-    LinearLayout layout1 = (LinearLayout) getView().findViewById(R.id.layout1);
+    LinearLayout layout1 = (LinearLayout) .findViewById(R.id.layout1);
     LinearLayout layout2 = (LinearLayout) getView().findViewById(R.id.layout2);
     //EditText FIRST NAME
     EditText firstname_enter = (EditText) getView().findViewById(R.id.firstname_enter);

@@ -13,7 +13,6 @@
     <item name="darkgreen" type="color">#FF669900</item>
     <item name="darkorange" type="color">#FFFF8800</item>
     <item name="darkred" type="color">#FFCC0000</item>
-    <item name="white" type="color"></item>
     <color name="divider">#B6B6B6</color>
     <color name="primary_text">#212121</color>
 

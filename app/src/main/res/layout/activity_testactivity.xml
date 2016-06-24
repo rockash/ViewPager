@@ -7,21 +7,21 @@
     android:layout_height="match_parent"
     android:fitsSystemWindows="true"
     tools:openDrawer="start">
-     <android.support.design.widget.NavigationView
+
+    <FrameLayout
+        android:id="@+id/fragment_container"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+    </FrameLayout>
+
+    <android.support.design.widget.NavigationView
         android:id="@+id/nav_view"
         android:layout_width="210dp"
         android:layout_height="wrap_content"
         android:layout_gravity="start"
-        android:fitsSystemWindows="true"
         android:layout_marginTop="50dp"
+        android:fitsSystemWindows="true"
         app:menu="@menu/activity_main_drawer" />
-
-
-     <FrameLayout
-         android:id="@+id/fragment_container"
-         android:layout_width="match_parent"
-         android:layout_height="match_parent">
-
-     </FrameLayout>
 
 </android.support.v4.widget.DrawerLayout>

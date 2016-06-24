@@ -25,6 +25,7 @@ public class ImageAdapter extends PagerAdapter {
     private static final String TAG = "ImageAdapter";
     private static final boolean DEBUG = false;
     int mFakeCount;
+    Intent intent;
 
 
     int[] mResources = {
@@ -137,7 +138,7 @@ public class ImageAdapter extends PagerAdapter {
                         //TODO      cover all cases
                         case 0:
 
-                            Intent intent = new Intent(context, testactivity.class);
+                            intent = new Intent(context, testactivity.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             intent.putExtra("from", ""+pos);
                             //custom constructor variable pass to testactivity
@@ -149,6 +150,12 @@ public class ImageAdapter extends PagerAdapter {
                         case 1:
                             break;
                         case 2:
+                            intent = new Intent(context, testactivity.class);
+                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                            intent.putExtra("from", ""+pos);
+                            //custom constructor variable pass to testactivity
+                            //intent.putExtra("POSITION",0);
+                            ((Activity)context).startActivity(intent);
                             break;
                         case 3:
                             break;

@@ -59,9 +59,9 @@ public class testactivity extends AppCompatActivity implements NavigationView.On
         String title = "";
         switch (id) {
 
-//            case R.id.pre_registration:
-//                fragmentClass = SecondFragment.class;
-//                break;
+            case 2:
+            fragmentClass = new pre_registration_frag();
+            break;
 //            case R.id.find_a_doctor:
 //                fragmentClass = ThirdFragment.class;
 //                break;
