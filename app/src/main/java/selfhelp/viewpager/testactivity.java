@@ -14,6 +14,7 @@ import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.MenuItem;
 import selfhelp.viewpager.Fragment.about_hospital_frag;
+import selfhelp.viewpager.Fragment.pre_registration_frag;
 
 public class testactivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
@@ -121,10 +122,11 @@ public class testactivity extends AppCompatActivity implements NavigationView.On
                 Intent intent = new Intent(this, MainActivity.class);
                 startActivity(intent);
                 break;
-            /*
+
             case R.id.pre_registration:
-                fragmentClass = SecondFragment.class;
+                fragmentClass = new pre_registration_frag();
                 break;
+            /*
             case R.id.find_a_doctor:
                 fragmentClass = ThirdFragment.class;
                 break;

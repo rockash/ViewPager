@@ -5,17 +5,27 @@
     android:orientation="vertical"
     android:padding="10dip">
 
+    <ImageView
+        android:id="@+id/user_img"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginTop="10dp"
+        android:layout_marginRight="10dp"
+        android:background="@drawable/logo" />
+
     <android.support.design.widget.TextInputLayout
 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="6dp">
 
+
     <EditText
         android:id="@+id/txtUsername"
         android:hint="Enter User Name"
         android:layout_width="fill_parent"
-        android:textColor="@color/background_material_dark"
+        android:textColor="@color/white"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"/>
     </android.support.design.widget.TextInputLayout>
@@ -31,9 +41,9 @@
         android:hint="Enter Password"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:textColor="@color/background_material_dark"
+        android:textColor="@color/white"
         android:layout_marginBottom="10dp"
-        android:inputType="numberPassword"
+        android:inputType="textPassword"
         android:singleLine="true"/>
 
     </android.support.design.widget.TextInputLayout>
