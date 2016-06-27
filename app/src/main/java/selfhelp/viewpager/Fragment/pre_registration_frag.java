@@ -20,6 +20,7 @@ import android.widget.LinearLayout;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
 import android.widget.Spinner;
+import android.widget.Toast;
 
 import java.text.DateFormat;
 import java.util.Calendar;
@@ -32,59 +33,61 @@ import static selfhelp.viewpager.R.id.dateofbirth_enter;
 public class pre_registration_frag extends Fragment implements View.OnClickListener {
     String LOG = "pre_registration_frag";
     Fragment fragment;
-    LinearLayout layout1 = (LinearLayout) .findViewById(R.id.layout1);
-    LinearLayout layout2 = (LinearLayout) getView().findViewById(R.id.layout2);
+    LinearLayout layout1;
+    LinearLayout layout2 ;
     //EditText FIRST NAME
-    EditText firstname_enter = (EditText) getView().findViewById(R.id.firstname_enter);
-    String firstname = firstname_enter.getText().toString();
+    EditText firstname_enter;
+    String firstname;
     //EditText LAST NAME
-    EditText lastname_enter = (EditText) getView().findViewById(R.id.lastname_enter);
-    String lastname = lastname_enter.getText().toString();
+    EditText lastname_enter;
+    String lastname;
     //EditText DATE
-    Calendar calendar;
-    DateFormat formate = DateFormat.getDateInstance();
-    EditText date_enter = (EditText) getView().findViewById(dateofbirth_enter);
-    Button date = (Button) getView().findViewById(R.id.calendar_button);
+    Calendar calendar = Calendar.getInstance() ;
+    DateFormat formate;
+    EditText date_enter;
+    Button date;
     //EditText MOBILE NUMBER
-    private final EditText mobileno_enter1 = (EditText) getView().findViewById(R.id.mobileno_enter1);
-    private final EditText mobileno_enter2 = (EditText) getView().findViewById(R.id.mobileno_enter2);
-    String mobileno1 = mobileno_enter1.getText().toString();
-    String mobileno2 = mobileno_enter2.getText().toString();
+    EditText mobileno_enter1;
+    EditText mobileno_enter2;
+    String mobileno1;
+    String mobileno2;
     //EditText LANDLINE NUMBER
-    private final EditText landlineno_enter1 = (EditText) getView().findViewById(R.id.landlineno_enter1);
-    private final EditText landlineno_enter2 = (EditText) getView().findViewById(R.id.landlineno_enter2);
-    String landline1 = landlineno_enter1.getText().toString();
-    String landline2 = landlineno_enter2.getText().toString();
+    EditText landlineno_enter1;
+    EditText landlineno_enter2;
+    String landline1;
+    String landline2;
     //EditText EMAIL
-    private final EditText email_enter = (EditText) getView().findViewById(R.id.email_enter);
-    String email = email_enter.getText().toString();
-    //Radiogroup GENDER         //TODO handle input
-    private final RadioGroup gender_enter = (RadioGroup) getView().findViewById(R.id.gender_enter);
-    String gender = String.valueOf(getView().findViewById(RadioGroup.generateViewId()));
-    RadioButton rb = new RadioButton(getActivity());
+    EditText email_enter;
+    String email;
+    RadioButton rb;
+    String gender;
     //Button NEXT
-    Button next;
+    Button next ;
+    //Button PREVIOUS
+    Button previous ;
+    //Button SUBMIT
+    Button submit ;
     //EditText PIN
-    private final EditText pincode_enter = (EditText) getView().findViewById(R.id.pincode_enter);
-    String pincode = pincode_enter.getText().toString();
+    EditText pincode_enter;
+    String pincode;
     //EditText ADDRESS LINE 1
-    private final EditText addressline1_enter = (EditText) getView().findViewById(R.id.addressline1_enter);
-    String addressline1 = addressline1_enter.getText().toString();
+    EditText addressline1_enter;
+    String addressline1;
     //EditText ADDRESS LINE 2
-    private final EditText addressline2_enter = (EditText) getView().findViewById(R.id.addressline2_enter);
-    String addressline2 = addressline2_enter.getText().toString();
+    //EditText addressline2_enter;
+    String addressline2;
     //EditText CITY/AREA
-    private final EditText cityarea_enter = (EditText) getView().findViewById(R.id.cityarea_enter);
-    String cityarea = cityarea_enter.getText().toString();
+    EditText cityarea_enter;
+    String cityarea;
     //EditText STATE
-    private final EditText state_enter = (EditText) getView().findViewById(R.id.state_enter);
-    String state = state_enter.getText().toString();
+    EditText state_enter;
+    String state;
     //EditText COUNTRY
-    private final EditText country_enter = (EditText) getView().findViewById(R.id.country_enter);
-    String country = country_enter.getText().toString();
+    EditText country_enter;
+    String country;
     // Spinner RELATION
-    private final Spinner relation_enter = (Spinner) getView().findViewById(R.id.relation_enter);
-    String relation = relation_enter.getSelectedItem().toString();
+    Spinner relation_enter;
+    String relation;
     Context context ;
     public pre_registration_frag() {
         // Required empty public constructor
@@ -98,14 +101,38 @@ public class pre_registration_frag extends Fragment implements View.OnClickListe
 
         View mView=inflater.inflate(R.layout.fragment_pre_registration_frag, container, false);
         context =container.getContext();
-        date.setOnClickListener((View.OnClickListener) getActivity());
-        date_enter.setOnClickListener((View.OnClickListener) getActivity());
-        updatedate();
+        layout1 = (LinearLayout)mView.findViewById(R.id.layout1);
+        layout2 = (LinearLayout)mView.findViewById(R.id.layout2);
+        firstname_enter = (EditText) mView.findViewById(R.id.firstname_enter);
+        lastname_enter = (EditText) mView.findViewById(R.id.lastname_enter);
+        formate = DateFormat.getDateInstance();
+        date_enter = (EditText) mView.findViewById(dateofbirth_enter);
+        date = (Button) mView.findViewById(R.id.calendar_button);
+        date.setOnClickListener(this);
+        date_enter.setOnClickListener(this);
+        mobileno_enter1 = (EditText) mView.findViewById(R.id.mobileno_enter1);
+        mobileno_enter2 = (EditText) mView.findViewById(R.id.mobileno_enter2);
+        landlineno_enter1 = (EditText) mView.findViewById(R.id.landlineno_enter1);
+        landlineno_enter2 = (EditText) mView.findViewById(R.id.landlineno_enter2);
+        email_enter = (EditText) mView.findViewById(R.id.email_enter);
+        pincode_enter = (EditText) mView.findViewById(R.id.pincode_enter);
+        addressline1_enter = (EditText) mView.findViewById(R.id.addressline1_enter);
+        //addressline2_enter = (EditText) mView.findViewById(R.id.addressline2_enter);
+        cityarea_enter = (EditText) mView.findViewById(R.id.cityarea_enter);
+        state_enter = (EditText) mView.findViewById(R.id.state_enter);
+        country_enter = (EditText) mView.findViewById(R.id.country_enter);
+        relation_enter = (Spinner) mView.findViewById(R.id.relation_enter);
+        next = (Button)mView.findViewById(R.id.nextbutton);
+        next.setOnClickListener(this);
+        previous = (Button)mView.findViewById(R.id.previousbutton);
+        previous.setOnClickListener(this);
+        submit = (Button)mView.findViewById(R.id.submitbutton);
+        submit.setOnClickListener(this);
+        //updatedate();
 
         return mView;
 
     }
-
 
     public void setDate(){
         new DatePickerDialog(context,d,calendar.get(Calendar.YEAR),calendar.get(Calendar.MONTH),calendar.get(Calendar.DAY_OF_MONTH)).show();
@@ -117,8 +144,9 @@ public class pre_registration_frag extends Fragment implements View.OnClickListe
             calendar.set(Calendar.YEAR,year);
             calendar.set(Calendar.MONTH,monthOfYear);
             calendar.set(Calendar.DAY_OF_MONTH,dayOfMonth);
+            //updatedate();
             date_enter.setText( "" + dayOfMonth + "-" + (monthOfYear + 1) + "-" + year );
-            updatedate();
+
 
         }
 
@@ -133,13 +161,71 @@ public class pre_registration_frag extends Fragment implements View.OnClickListe
             case R.id.calendar_button :
                 setDate();
                 break;
+            case R.id.dateofbirth_enter :
+                setDate();
+                break;
             case R.id.nextbutton :
                 layout1.setVisibility(View.GONE);
                 layout2.setVisibility(View.VISIBLE);
+                //Toast.makeText(context,"next button clicked", Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.previousbutton :
+                layout2.setVisibility(View.GONE);
+                layout1.setVisibility(View.VISIBLE);
+                break;
+            case R.id.submitbutton :
+                firstname = firstname_enter.getText().toString();
+                lastname = lastname_enter.getText().toString();
+                mobileno1 = mobileno_enter1.getText().toString();
+                mobileno2 = mobileno_enter2.getText().toString();
+                landline1 = landlineno_enter1.getText().toString();
+                landline2 = landlineno_enter2.getText().toString();
+                email = email_enter.getText().toString();
+                pincode = pincode_enter.getText().toString();
+                addressline1 = addressline1_enter.getText().toString();
+               // addressline2 = addressline2_enter.getText().toString();
+                cityarea = cityarea_enter.getText().toString();
+                state = state_enter.getText().toString();
+                country = country_enter.getText().toString();
+                relation = relation_enter.getSelectedItem().toString();
+                Toast.makeText(context,"send data to be implemented",Toast.LENGTH_SHORT).show();
+                break;
+            case R.id.radiobutton_male :
+                 addListenerOnButton(v);
+                 break;
+            case R.id.radiobutton_female :
+                addListenerOnButton(v);
+                break;
+            case R.id.radiobutton_other :
+                addListenerOnButton(v);
                 break;
             default:
                 Log.d(LOG,"default case");
         }
     }
+    public String addListenerOnButton(View view) {
 
+        //Radiogroup GENDER
+        final RadioGroup gender_enter = (RadioGroup) view.findViewById(R.id.gender_enter);
+
+        gender_enter.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View v) {
+                // get selected radio button from radioGroup
+                int selectedId = gender_enter.getCheckedRadioButtonId();
+
+                // find the radiobutton by returned id
+                rb = (RadioButton) v.findViewById(selectedId);
+                gender = (String) rb.getText();
+                Toast.makeText(context,
+                        rb.getText(), Toast.LENGTH_SHORT).show();
+
+            }
+
+        });
+
+
+return gender;
+    }
 }

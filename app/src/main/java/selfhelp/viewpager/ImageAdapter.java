@@ -1,8 +1,13 @@
 package selfhelp.viewpager;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.ActivityNotFoundException;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.location.LocationManager;
+import android.net.Uri;
 import android.support.v4.view.PagerAdapter;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -11,6 +16,8 @@ import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.Toast;
+
+import java.util.Locale;
 
 
 /**
@@ -62,6 +69,7 @@ public class ImageAdapter extends PagerAdapter {
         //Log.d(TAG,"view object created");
         ImageView img = (ImageView) itemview.findViewById(R.id.imageView);
         //Log.d(TAG,"imageview object created");
+
         if (position >= mResources.length) {
             int newPosition = Math.abs(position) % mResources.length;
             position = Math.abs(newPosition);
@@ -143,11 +151,19 @@ public class ImageAdapter extends PagerAdapter {
                             intent.putExtra("from", ""+pos);
                             //custom constructor variable pass to testactivity
                             //intent.putExtra("POSITION",0);
-                            ((Activity)context).startActivity(intent);
+                            context.startActivity(intent);
 
                             break;
 
                         case 1:
+
+                            final LocationManager manager = (LocationManager) context.getSystemService( Context.LOCATION_SERVICE );
+                            if ( !manager.isProviderEnabled( LocationManager.GPS_PROVIDER ) ) {
+                                buildAlertMessageNoGps();
+
+                            }
+
+
                             break;
                         case 2:
                             intent = new Intent(context, testactivity.class);
@@ -183,6 +199,49 @@ public class ImageAdapter extends PagerAdapter {
     // position will now refer to a correct index into your mResources list
     // even if the user has paged so many times that the view has wrapped
 
+    private void buildAlertMessageNoGps() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(context);
+        builder.setMessage("Your GPS seems to be disabled, do you want to enable it?")
+                .setCancelable(false)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(@SuppressWarnings("unused") final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
+                        context.startActivity(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
+                        dialog.cancel();
+                    }
+                });
+        final AlertDialog alert = builder.create();
+        alert.show();
+    }
+
+    private void mapsintent(){
+        float lat = 18.9591624f;
+        float lng = 72.8199164f;
+        String maplLabel = "HNH Hospital";
+
+        String uri = String.format(Locale.ENGLISH, "http://maps.google.com/maps?daddr=%f,%f (%s)", lat, lng, maplLabel);
+        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+        intent.setClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");
+        try
+        {
+            context.startActivity(intent);
+        }
+        catch(ActivityNotFoundException ex)
+        {
+            try
+            {
+                Intent unrestrictedIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+                context.startActivity(unrestrictedIntent);
+            }
+            catch(ActivityNotFoundException innerEx)
+            {
+                Toast.makeText(context, "Please install a maps application", Toast.LENGTH_LONG).show();
+            }
+        }
+    }
     @Override
     public boolean isViewFromObject(View view, Object object) {
 
