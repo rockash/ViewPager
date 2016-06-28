@@ -8,6 +8,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.location.LocationManager;
 import android.net.Uri;
+import android.provider.Settings;
 import android.support.v4.view.PagerAdapter;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -18,6 +19,8 @@ import android.widget.LinearLayout;
 import android.widget.Toast;
 
 import java.util.Locale;
+
+import static android.support.v4.app.ActivityCompat.startActivity;
 
 
 /**
@@ -33,6 +36,12 @@ public class ImageAdapter extends PagerAdapter {
     private static final boolean DEBUG = false;
     int mFakeCount;
     Intent intent;
+    static LocationManager manager= null;
+    float lat = 18.9591624f;
+    float lng = 72.8199164f;
+    String maplLabel = "HNH Hospital";
+    String uri = String.format(Locale.ENGLISH, "http://maps.google.com/maps?daddr=%f,%f (%s)", lat, lng, maplLabel);
+    public static boolean gpsenabled =false;
 
 
     int[] mResources = {
@@ -155,14 +164,19 @@ public class ImageAdapter extends PagerAdapter {
 
                             break;
 
-                        case 1:
+                        case 1: //
 
-                            final LocationManager manager = (LocationManager) context.getSystemService( Context.LOCATION_SERVICE );
+                             manager = (LocationManager) context.getSystemService( Context.LOCATION_SERVICE );
                             if ( !manager.isProviderEnabled( LocationManager.GPS_PROVIDER ) ) {
+                                gpsenabled = true;
                                 buildAlertMessageNoGps();
-
+                                Log.d("GPS ENABLED","gps enabled value after dialog create from imageadapter : "+gpsenabled);
                             }
-
+                            else {
+                                gpsenabled = false;
+                                mapsintent();
+                                Log.d("GPS ENABLED","gps enabled value after intent from imageadapter : "+gpsenabled);
+                            }
 
                             break;
                         case 2:
@@ -199,13 +213,14 @@ public class ImageAdapter extends PagerAdapter {
     // position will now refer to a correct index into your mResources list
     // even if the user has paged so many times that the view has wrapped
 
-    private void buildAlertMessageNoGps() {
+    void buildAlertMessageNoGps() {
         final AlertDialog.Builder builder = new AlertDialog.Builder(context);
         builder.setMessage("Your GPS seems to be disabled, do you want to enable it?")
                 .setCancelable(false)
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     public void onClick(@SuppressWarnings("unused") final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
                         context.startActivity(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+
                     }
                 })
                 .setNegativeButton("No", new DialogInterface.OnClickListener() {
@@ -217,17 +232,15 @@ public class ImageAdapter extends PagerAdapter {
         alert.show();
     }
 
-    private void mapsintent(){
-        float lat = 18.9591624f;
-        float lng = 72.8199164f;
-        String maplLabel = "HNH Hospital";
+    void mapsintent(){
 
-        String uri = String.format(Locale.ENGLISH, "http://maps.google.com/maps?daddr=%f,%f (%s)", lat, lng, maplLabel);
-        Intent intent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
-        intent.setClassName("com.google.android.apps.maps", "com.google.android.maps.MapsActivity");
+        Intent intent = new Intent(Intent.ACTION_VIEW,
+                Uri.parse(uri));
+
         try
         {
             context.startActivity(intent);
+            gpsenabled = false;
         }
         catch(ActivityNotFoundException ex)
         {
@@ -242,6 +255,7 @@ public class ImageAdapter extends PagerAdapter {
             }
         }
     }
+
     @Override
     public boolean isViewFromObject(View view, Object object) {
 

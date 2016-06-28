@@ -1,6 +1,10 @@
 package selfhelp.viewpager;
 
+import android.content.ActivityNotFoundException;
+import android.content.Context;
 import android.content.Intent;
+import android.location.LocationManager;
+import android.net.Uri;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.GravityCompat;
@@ -18,6 +22,7 @@ import android.widget.Toast;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Locale;
 import java.util.Vector;
 
 public class MainActivity extends AppCompatActivity{
@@ -75,6 +80,24 @@ public class MainActivity extends AppCompatActivity{
         finish();
 
     }
+    @Override
+    protected void onResume() {
+        super.onResume();
+        LocationManager manager = (LocationManager) getSystemService( Context.LOCATION_SERVICE );
+
+            Log.d("GPS ENABLED","gpsenabled value in onresume : "+ImageAdapter.gpsenabled);
+        if (ImageAdapter.gpsenabled == true && manager != null) {
+            if (manager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+                ImageAdapter.gpsenabled = false;
+                Intent i = new Intent(android.content.Intent.ACTION_VIEW,
+                        Uri.parse("google.navigation:q=" + 18.9591624 + ","
+                                + 72.8199164 + ""));
+                startActivity(i);
+            } else {
+                ImageAdapter.gpsenabled = false;
+            }
+        }
+        }
 
 
 /*

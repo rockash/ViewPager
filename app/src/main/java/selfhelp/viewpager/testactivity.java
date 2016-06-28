@@ -86,13 +86,10 @@ public class testactivity extends AppCompatActivity implements NavigationView.On
 //                fragmentClass = ThirdFragment.class;
 //                break;
             case R.id.how_to_reach:
-                float lat = 18.9591624f;
-                float lng = 72.8199164f;
-
-                String maplLabel = "HNH Directions";
-                intent = new Intent(android.content.Intent.ACTION_VIEW,
-                        Uri.parse("geo:0,0?q="+lat+","+lng+"&z=16 (" + maplLabel + ")"));
-                startActivity(intent);
+                Intent i = new Intent(android.content.Intent.ACTION_VIEW,
+                        Uri.parse("google.navigation:q=" + 18.9591624 + ","
+                                + 72.8199164 + ""));
+                startActivity(i);
                break;
             case 0:
                 fragmentClass = new about_hospital_frag();
