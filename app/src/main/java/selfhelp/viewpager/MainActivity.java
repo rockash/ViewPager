@@ -31,7 +31,7 @@ public class MainActivity extends AppCompatActivity{
     public ViewPager pager;
     ImageView img;
     // User Session Manager object
-    UserSessionManager session;
+    static UserSessionManager session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -1,7 +1,12 @@
 package selfhelp.viewpager;
 
 import android.app.Activity;
+import android.app.AlertDialog;
+import android.content.ActivityNotFoundException;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.location.LocationManager;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
@@ -16,11 +21,18 @@ import android.util.Log;
 import android.view.MenuItem;
 import android.widget.Toast;
 
+import java.util.Locale;
+
 import selfhelp.viewpager.Fragment.about_hospital_frag;
 import selfhelp.viewpager.Fragment.pre_registration_frag;
 
 public class testactivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     Intent intent;
+    float lat = 18.9591624f;
+    float lng = 72.8199164f;
+    String maplLabel = "HNH Hospital";
+    String uri = String.format(Locale.ENGLISH, "http://maps.google.com/maps?daddr=%f,%f (%s)", lat, lng, maplLabel);
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -86,11 +98,23 @@ public class testactivity extends AppCompatActivity implements NavigationView.On
 //                fragmentClass = ThirdFragment.class;
 //                break;
             case R.id.how_to_reach:
-                Intent i = new Intent(android.content.Intent.ACTION_VIEW,
-                        Uri.parse("google.navigation:q=" + 18.9591624 + ","
-                                + 72.8199164 + ""));
-                startActivity(i);
-               break;
+                LocationManager manager = (LocationManager) getSystemService( Context.LOCATION_SERVICE );
+                if ( !manager.isProviderEnabled( LocationManager.GPS_PROVIDER ) ) {
+                    ImageAdapter.gpsenabled = true;
+                    buildAlertMessageNoGps();
+                    Log.d("GPS ENABLED","gps enabled value after dialog create from imageadapter : "+ImageAdapter.gpsenabled);
+                }
+                else {
+                    ImageAdapter.gpsenabled = false;
+                    mapsintent();
+                    Log.d("GPS ENABLED","gps enabled value after intent from imageadapter : "+ImageAdapter.gpsenabled);
+                }
+
+                String maplLabel = "HNH Directions";
+                intent = new Intent(android.content.Intent.ACTION_VIEW,
+                        Uri.parse("geo:0,0?q="+lat+","+lng+"&z=16 (" + maplLabel + ")"));
+                startActivity(intent);
+                break;
             case 0:
                 fragmentClass = new about_hospital_frag();
                 title = "About Hospital";
@@ -120,7 +144,23 @@ public class testactivity extends AppCompatActivity implements NavigationView.On
         }
         }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        LocationManager manager = (LocationManager) getSystemService( Context.LOCATION_SERVICE );
 
+        Log.d("GPS ENABLED","gpsenabled value in onresume : "+ImageAdapter.gpsenabled);
+        if (ImageAdapter.gpsenabled == true && manager != null) {
+            if (manager.isProviderEnabled(LocationManager.GPS_PROVIDER)) {
+                ImageAdapter.gpsenabled = false;
+                Intent i = new Intent(android.content.Intent.ACTION_VIEW,
+                        Uri.parse(uri));
+                startActivity(i);
+            } else {
+                ImageAdapter.gpsenabled = false;
+            }
+        }
+    }
     public boolean onNavigationItemSelected(MenuItem menuItem) {
         // Handle navigation view item clicks here.
         int id = menuItem.getItemId();
@@ -151,13 +191,19 @@ public class testactivity extends AppCompatActivity implements NavigationView.On
             case R.id.check_your_profile:
                 break;
             case R.id.how_to_reach:
-                float lat = 18.9591624f;
-                float lng = 72.8199164f;
 
-                String maplLabel = "HNH Directions";
-                intent = new Intent(android.content.Intent.ACTION_VIEW,
-                        Uri.parse("geo:0,0?q="+lat+","+lng+"&z=16 (" + maplLabel + ")"));
-                startActivity(intent);
+                LocationManager manager = (LocationManager) getSystemService( Context.LOCATION_SERVICE );
+                if ( !manager.isProviderEnabled( LocationManager.GPS_PROVIDER ) ) {
+                    ImageAdapter.gpsenabled = true;
+                    buildAlertMessageNoGps();
+                    Log.d("GPS ENABLED","gps enabled value after dialog create from imageadapter : "+ImageAdapter.gpsenabled);
+                }
+                else {
+                    ImageAdapter.gpsenabled = false;
+                    mapsintent();
+                    Log.d("GPS ENABLED","gps enabled value after intent from imageadapter : "+ImageAdapter.gpsenabled);
+                }
+
                 break;
             case R.id.about_hospital:
                 fragmentClass = new about_hospital_frag();
@@ -167,6 +213,13 @@ public class testactivity extends AppCompatActivity implements NavigationView.On
 
                 break;
             case R.id.feedback:
+                break;
+            case R.id.faq:
+                break;
+            case R.id.logout:
+                MainActivity.session.logoutUser();
+                intent = new Intent(this, MainActivity.class);
+                startActivity(intent);
                 break;
             default:
                 Log.w(this.getClass().getSimpleName(),
@@ -189,6 +242,47 @@ public class testactivity extends AppCompatActivity implements NavigationView.On
 
         drawer.closeDrawer(GravityCompat.START);
        return true;
+    }
+    void buildAlertMessageNoGps() {
+        final AlertDialog.Builder builder = new AlertDialog.Builder(this);
+        builder.setMessage("Your GPS seems to be disabled, do you want to enable it?")
+                .setCancelable(false)
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    public void onClick(@SuppressWarnings("unused") final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
+                        startActivity(new Intent(android.provider.Settings.ACTION_LOCATION_SOURCE_SETTINGS));
+
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    public void onClick(final DialogInterface dialog, @SuppressWarnings("unused") final int id) {
+                        dialog.cancel();
+                    }
+                });
+        final AlertDialog alert = builder.create();
+        alert.show();
+    }
+
+    void mapsintent(){
+
+        Intent intent = new Intent(Intent.ACTION_VIEW,Uri.parse(uri));
+
+        try
+        {
+            startActivity(intent);
+            ImageAdapter.gpsenabled = false;
+        }
+        catch(ActivityNotFoundException ex)
+        {
+            try
+            {
+                Intent unrestrictedIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(uri));
+                startActivity(unrestrictedIntent);
+            }
+            catch(ActivityNotFoundException innerEx)
+            {
+                Toast.makeText(this, "Please install a maps application", Toast.LENGTH_LONG).show();
+            }
+        }
     }
 }
 
