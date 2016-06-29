@@ -3,6 +3,7 @@ package selfhelp.viewpager;
 
 import android.app.Activity;
 import android.content.Intent;
+import android.os.AsyncTask;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -14,7 +15,7 @@ public class LoginActivity extends Activity {
 
     Button btnLogin,btnSignup;
 
-    EditText txtUsername, txtPassword;
+    EditText txtMobileNo, txtPassword;
 
     // User Session Manager Class
     UserSessionManager session;
@@ -28,7 +29,7 @@ public class LoginActivity extends Activity {
         session = new UserSessionManager(LoginActivity.this);
 
         // get Email, Password input text
-        txtUsername = (EditText) findViewById(R.id.txtUsername);
+        txtMobileNo = (EditText) findViewById(R.id.txtMobileNo);
         txtPassword = (EditText) findViewById(R.id.txtPassword);
 
         Toast.makeText(getApplicationContext(),
@@ -49,7 +50,7 @@ public class LoginActivity extends Activity {
             public void onClick(View arg0) {
 
                 // Get username, password from EditText
-                String username = txtUsername.getText().toString();
+                String username = txtMobileNo.getText().toString();
                 String password = txtPassword.getText().toString();
 
                 // Validate if username, password is filled
@@ -59,7 +60,11 @@ public class LoginActivity extends Activity {
                     // username = admin
                     // password = admin
 
-                    if(username.equals("admin") && password.equals("1234")){
+                    //TODO async task implementation
+                    new getcanlogin().execute();
+
+
+                    if(username.equals("9167034191") && password.equals("1234")){
 
                         // Creating user login session
                         // Statically storing name="Android Example"
@@ -99,5 +104,27 @@ public class LoginActivity extends Activity {
 
             }
         });
+    }
+
+    //TODO AsyncTask method completion
+    private class getcanlogin extends AsyncTask<String,String,String>
+    {
+        @Override
+        protected void onPreExecute() {
+            super.onPreExecute();
+        }
+
+        @Override
+        protected String doInBackground(String... params) {
+
+
+            return "xyz";
+        }
+
+        @Override
+        protected void onPostExecute(String s) {
+
+
+        }
     }
 }
