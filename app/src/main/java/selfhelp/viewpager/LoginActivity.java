@@ -1,5 +1,4 @@
 package selfhelp.viewpager;
-//LoginActivity.java
 
 import android.app.Activity;
 import android.content.Intent;
@@ -28,7 +27,7 @@ public class LoginActivity extends Activity {
         // User Session Manager
         session = new UserSessionManager(LoginActivity.this);
 
-        // get Email, Password input text
+        // get Mobile number, Password input text
         txtMobileNo = (EditText) findViewById(R.id.txtMobileNo);
         txtPassword = (EditText) findViewById(R.id.txtPassword);
 
@@ -61,7 +60,7 @@ public class LoginActivity extends Activity {
                     // password = admin
 
                     //TODO async task implementation
-                    new getcanlogin().execute();
+                   // new getcanlogin().execute();
 
 
                     if(username.equals("9167034191") && password.equals("1234")){
@@ -83,13 +82,13 @@ public class LoginActivity extends Activity {
                     }else{
 
                         // username / password doesn't match
-                        Toast.makeText(getApplicationContext(), "Username/Password is incorrect", Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Mobile number/Password is incorrect", Toast.LENGTH_LONG).show();
 
                     }
                 }else{
 
                     // user didn't entered username or password
-                    Toast.makeText(getApplicationContext(), "Please enter username and password", Toast.LENGTH_LONG).show();
+                    Toast.makeText(getApplicationContext(), "Please enter Mobile number and Password", Toast.LENGTH_LONG).show();
 
                 }
 
@@ -107,7 +106,7 @@ public class LoginActivity extends Activity {
     }
 
     //TODO AsyncTask method completion
-    private class getcanlogin extends AsyncTask<String,String,String>
+   /* private class getcanlogin extends AsyncTask<String,String,String>
     {
         @Override
         protected void onPreExecute() {
@@ -126,5 +125,5 @@ public class LoginActivity extends Activity {
 
 
         }
-    }
+    }*/
 }
