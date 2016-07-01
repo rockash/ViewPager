@@ -28,7 +28,7 @@
             android:layout_marginBottom="10dp"
             android:hint="Enter Mobile Number"
             android:textColor="@android:color/white"
-            android:inputType="phone"/>
+            />
     </android.support.design.widget.TextInputLayout>
 
     <android.support.design.widget.TextInputLayout
@@ -53,6 +53,7 @@
         android:id="@+id/btnLogin"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:focusable="true"
         android:text="Login" />
 
     <Button
