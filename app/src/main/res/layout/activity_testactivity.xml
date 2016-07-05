@@ -17,10 +17,10 @@
 
     <android.support.design.widget.NavigationView
         android:id="@+id/nav_view"
-        android:layout_width="210dp"
-        android:layout_height="wrap_content"
+        android:layout_width="wrap_content"
+        android:layout_height="match_parent"
         android:layout_gravity="start"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="@dimen/abc_action_bar_navigation_padding_start_material"
         android:fitsSystemWindows="true"
         app:menu="@menu/activity_main_drawer" />
 

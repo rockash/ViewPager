@@ -13,23 +13,19 @@
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content">
-            <TextView
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="0.5dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:text="Brief Profile"
-                />
+
             <ImageView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:id="@+id/briefprofile_imageview"
                 android:src="@drawable/briefprofile_portrait"
+                android:layout_centerHorizontal="true"
                 />
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/briefprofile"
+        android:layout_margin="15dp"
         android:textColor="@color/background_material_dark"
         android:text="@string/brief_hospital"
         android:layout_below="@+id/briefprofile_imageview"/>

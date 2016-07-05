@@ -1,48 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<RelativeLayout
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
-       <FrameLayout
-           android:layout_width="match_parent"
-           android:layout_height="match_parent"
-           android:layout_below="@+id/imageView1"
-           android:layout_above="@+id/imageView2">
 
-           <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-               xmlns:tools="http://schemas.android.com/tools"
-               android:layout_width="match_parent"
-               android:layout_height="match_parent"
-               tools:context="selfhelp.viewpager.MainActivity">
-
-               <android.support.v4.view.ViewPager
-                   android:id="@+id/myviewpager"
-                   android:layout_width="wrap_content"
-                   android:layout_height="fill_parent"
-                   android:layout_gravity="center_horizontal"
-                   android:clickable="true"/>
-
-           </LinearLayout>
-       </FrameLayout>
-           <ImageView
-               android:layout_width="match_parent"
-               android:layout_height="110dp"
-               android:src="@drawable/topbanner"
-               android:id="@+id/imageView1"
-               android:layout_alignParentTop="true"
-               android:scaleType="fitXY"
-
-               />
-           <ImageView
-               android:layout_width="match_parent"
-               android:layout_height="150dp"
-               android:src="@drawable/bottombanner"
-               android:id="@+id/imageView2"
-               android:layout_alignParentBottom="true"
-               android:scaleType="fitXY"
+    <FrameLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_above="@+id/imageView2"
+        android:layout_below="@+id/imageView1"
+        android:layout_marginBottom="-35dp"
+        android:layout_marginTop="-25dp">
 
 
-               />
+        <android.support.v4.view.ViewPager
+            android:id="@+id/myviewpager"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:clickable="true"
+            android:clipToPadding="false" />
+
+
+    </FrameLayout>
+
+    <ImageView
+        android:id="@+id/imageView1"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:background="@drawable/topbanner" />
+
+    <ImageView
+        android:id="@+id/imageView2"
+        android:layout_width="match_parent"
+        android:layout_height="240dp"
+        android:layout_alignParentBottom="true"
+        android:background="@drawable/bottombanner" />
 </RelativeLayout>

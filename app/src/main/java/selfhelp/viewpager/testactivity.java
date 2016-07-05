@@ -1,5 +1,6 @@
 package selfhelp.viewpager;
 
+import android.app.ActionBar;
 import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
@@ -32,7 +33,8 @@ public class testactivity extends AppCompatActivity implements NavigationView.On
     float lng = 72.8199164f;
     String maplLabel = "HNH Hospital";
     String uri = String.format(Locale.ENGLISH, "http://maps.google.com/maps?daddr=%f,%f (%s)", lat, lng, maplLabel);
-
+    DrawerLayout drawer;
+    ActionBarDrawerToggle toggle;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -41,10 +43,9 @@ public class testactivity extends AppCompatActivity implements NavigationView.On
         if (toolbar != null) {
             setSupportActionBar(toolbar);
             getSupportActionBar().setTitle(testactivity.this.getResources().getString(R.string.app_name));
-            //getSupportActionBar().setDisplayHomeAsUpEnabled(true);
         }
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+        drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        toggle = new ActionBarDrawerToggle(
                 this, drawer, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.setDrawerListener(toggle);
         toggle.syncState();
@@ -82,21 +83,6 @@ public class testactivity extends AppCompatActivity implements NavigationView.On
             fragmentClass = new pre_registration_frag();
                 title = "Pre - Registration";
             break;
-//            case R.id.find_a_doctor:
-//                fragmentClass = ThirdFragment.class;
-//                break;
-//            case R.id.book_an_appointment:
-//                fragmentClass = ThirdFragment.class;
-//                break;
-//            case R.id.book_a_health_package:
-//                fragmentClass = ThirdFragment.class;
-//                break;
-//            case R.id.my_appointments:
-//                fragmentClass = ThirdFragment.class;
-//                break;
-//            case R.id.check_your_profile:
-//                fragmentClass = ThirdFragment.class;
-//                break;
             case R.id.how_to_reach:
                 LocationManager manager = (LocationManager) getSystemService( Context.LOCATION_SERVICE );
                 if ( !manager.isProviderEnabled( LocationManager.GPS_PROVIDER ) ) {
@@ -119,12 +105,6 @@ public class testactivity extends AppCompatActivity implements NavigationView.On
                 fragmentClass = new about_hospital_frag();
                 title = "About Hospital";
                 break;
-//            *//*case R.id.news:
-//                fragmentClass = ThirdFragment.class;
-//                break;
-//            case R.id.feedback:
-//                fragmentClass = ThirdFragment.class;
-//                break;*//*
             default:
                 Log.w(this.getClass().getSimpleName(),
                         "Reached Default in view pager item click switch case");
@@ -160,6 +140,19 @@ public class testactivity extends AppCompatActivity implements NavigationView.On
                 ImageAdapter.gpsenabled = false;
             }
         }
+    }
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        // Handle action bar item clicks here. The action bar will
+        // automatically handle clicks on the Home/Up button, so long
+        // as you specify a parent activity in AndroidManifest.xml.
+        int id = item.getItemId();
+
+        if (toggle.onOptionsItemSelected(item)) {
+            return true;
+        }
+
+        return super.onOptionsItemSelected(item);
     }
     public boolean onNavigationItemSelected(MenuItem menuItem) {
         // Handle navigation view item clicks here.
@@ -213,8 +206,6 @@ public class testactivity extends AppCompatActivity implements NavigationView.On
 
                 break;
             case R.id.feedback:
-                break;
-            case R.id.faq:
                 break;
             case R.id.logout:
                 MainActivity.session.logoutUser();

@@ -31,11 +31,11 @@ import javax.net.ssl.SSLContext;
 import javax.net.ssl.TrustManager;
 import javax.net.ssl.X509TrustManager;
 
-public class LoginActivity extends Activity {
+public class LoginActivity extends AppCompatActivity implements View.OnClickListener {
 
     Button btnLogin, btnSignup;
 
-    EditText txtMobileNo, txtPassword;
+    EditText txtusername, txtPassword;
     String authenticationcheck = "";
 
     // Defined URL  where to send data
@@ -59,7 +59,7 @@ public class LoginActivity extends Activity {
         session = new UserSessionManager(LoginActivity.this);
 
         // get Mobile number, Password input text
-        txtMobileNo = (EditText) findViewById(R.id.txtMobileNo);
+        txtusername = (EditText) findViewById(R.id.txtUsername);
         txtPassword = (EditText) findViewById(R.id.txtPassword);
 
         Toast.makeText(getApplicationContext(),
@@ -69,9 +69,11 @@ public class LoginActivity extends Activity {
 
         // User Login button
         btnLogin = (Button) findViewById(R.id.btnLogin);
+        btnLogin.setOnClickListener(this);
 
         // User Signup button
         btnSignup = (Button) findViewById(R.id.btnSignup);
+        btnSignup.setOnClickListener(this);
         TrustManager[] trustAllCerts = new TrustManager[]{
                 new X509TrustManager() {
 
@@ -98,15 +100,15 @@ public class LoginActivity extends Activity {
             System.out.println(e);
         }
 
-        // Login button click event
-        btnLogin.setOnClickListener(new View.OnClickListener() {
 
-            @Override
-            public void onClick(View arg0) {
 
-                // Get username, password from EditText
-                String username = txtMobileNo.getText().toString();
-                String password = txtPassword.getText().toString();
+
+    }
+
+    private void setBtnLogin(){
+        // Get username, password from EditText
+        String username = txtusername.getText().toString();
+        String password = txtPassword.getText().toString();
 
 
                /* // Validate if username, password is filled
@@ -116,44 +118,51 @@ public class LoginActivity extends Activity {
                     // username = admin
                     // password = admin
 */
-                //TODO async task implementation
-                new getcanlogin().execute();
+
+        new getcanlogin().execute();
 
 
-                if ((username.equals("9167034191") && password.equals("1234") || authenticationcheck.contains("P100"))) {
+        if ((username.equals("9167034191") && password.equals("1234") || authenticationcheck.contains("P100"))) {
 
-                    // Creating user login session
-                    // Statically storing name="Android Example"
-                    // and email="androidexample84@gmail.com"
-                    session.createUserLoginSession(username, password);
+            // Creating user login session
+            // Statically storing name="Android Example"
+            // and email="androidexample84@gmail.com"
+            session.createUserLoginSession(username, password);
 
-                    // Starting MainActivity
-                    Intent i = new Intent(LoginActivity.this, MainActivity.class);
-                    i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            // Starting MainActivity
+            Intent i = new Intent(LoginActivity.this, MainActivity.class);
+            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
 
-                    // Add new Flag to start new Activity
-                    i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    startActivity(i);
-                    finish();
+            // Add new Flag to start new Activity
+            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            startActivity(i);
+            finish();
 
-                }
-            }
+        }
 
-
-        });
-
-        btnSignup.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent i = new Intent(getApplicationContext(), SignupActivity.class);
-                startActivity(i);
-                finish();
-
-            }
-        });
     }
 
-    //TODO AsyncTask method completion
+    private void setBtnSignup(){
+        Intent i = new Intent(getApplicationContext(), SignupActivity.class);
+        startActivity(i);
+        finish();
+    }
+
+    @Override
+    public void onClick(View v) {
+        switch (v.getId()) {
+            case R.id.btnLogin:
+                setBtnLogin();
+                break;
+
+            case R.id.btnSignup:
+                setBtnSignup();
+                break;
+
+        }
+    }
+
+
     private class getcanlogin extends AsyncTask<String, String, String> {
         @Override
         protected void onPreExecute() {
@@ -185,7 +194,7 @@ public class LoginActivity extends Activity {
 
     // Create GetText Metod
     public String GetText(URL url) throws UnsupportedEncodingException {
-        String username = txtMobileNo.getText().toString();
+        String username = txtusername.getText().toString();
         String password = txtPassword.getText().toString();
 
         // Create data variable for sent values to server

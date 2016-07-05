@@ -128,6 +128,7 @@ public class pre_registration_frag extends Fragment implements View.OnClickListe
         previous.setOnClickListener(this);
         submit = (Button)mView.findViewById(R.id.submitbutton);
         submit.setOnClickListener(this);
+        layout2.setVisibility(View.GONE);
         //updatedate();
 
         return mView;

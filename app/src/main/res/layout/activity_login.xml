@@ -22,11 +22,11 @@
 
 
         <EditText
-            android:id="@+id/txtMobileNo"
+            android:id="@+id/txtUsername"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:hint="Enter Mobile Number"
+            android:hint="Enter Username"
             android:textColor="@android:color/white"
             />
     </android.support.design.widget.TextInputLayout>
@@ -54,11 +54,13 @@
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:focusable="true"
-        android:text="Login" />
+        android:text="Login"
+        android:onClick="setBtnLogin"/>
 
     <Button
         android:id="@+id/btnSignup"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
-        android:text="Sign up" />
+        android:text="Sign up"
+        android:onClick="setBtnSignup"/>
 </LinearLayout>

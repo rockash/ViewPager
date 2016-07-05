@@ -3,6 +3,7 @@ package selfhelp.viewpager;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.location.LocationManager;
 import android.net.Uri;
 import android.support.design.widget.NavigationView;
@@ -37,6 +38,8 @@ public class MainActivity extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         clearPreferences();
         super.onCreate(savedInstanceState);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_NOSENSOR);
+
         setContentView(R.layout.activity_main);
         // Session class instance
         session = new UserSessionManager(getApplicationContext());
@@ -45,9 +48,9 @@ public class MainActivity extends AppCompatActivity{
         pager.setAdapter(adapter);
         pager.setPageMargin(5);
 
-        Toast.makeText(getApplicationContext(),
+        /*Toast.makeText(getApplicationContext(),
                 "User Login Status: " + session.isUserLoggedIn(),
-                Toast.LENGTH_LONG).show();
+                Toast.LENGTH_LONG).show();*/
 
 
     }

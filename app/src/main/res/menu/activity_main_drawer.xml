@@ -47,11 +47,9 @@
             android:icon="@drawable/feedback_icon"
             android:title="Feedback" />
         <item
-            android:id="@+id/faq"
-            android:title="FAQ" />
-        <item
             android:id="@+id/logout"
-            android:title="logout" />
+            android:title="Logout"
+            android:icon="@drawable/logout"/>
     </group>
 
 </menu>

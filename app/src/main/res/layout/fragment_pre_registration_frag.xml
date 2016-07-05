@@ -15,8 +15,7 @@
     android:id="@+id/layout1"
     android:layout_height="match_parent"
     android:layout_width="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android"
-    android:weightSum="1">
+    xmlns:android="http://schemas.android.com/apk/res/android" >
 
     <TextView
         android:layout_width="wrap_content"
@@ -223,8 +222,7 @@
         android:id="@+id/layout2"
         android:layout_height="match_parent"
         android:layout_width="match_parent"
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        android:weightSum="1">
+        xmlns:android="http://schemas.android.com/apk/res/android">
 
 
         <TextView
@@ -319,30 +317,30 @@
             android:entries="@array/relation"
             android:layout_marginLeft="10dp"
             android:layout_marginRight="10dp" />
+        <LinearLayout
+            android:orientation="horizontal"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:layout_marginTop="70dp">
 
+            <Button
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="Previous"
+                android:id="@+id/previousbutton"
+                android:layout_gravity="center_horizontal" />
+
+            <Button
+                android:layout_height="wrap_content"
+                android:layout_width="wrap_content"
+                android:text="Submit"
+                android:id="@+id/submitbutton"
+                android:layout_gravity="center_horizontal" />
+        </LinearLayout>
     </LinearLayout>
     </ScrollView>
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center_horizontal"
-        android:layout_marginTop="70dp">
 
-        <Button
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:text="Previous"
-            android:id="@+id/previousbutton"
-            android:layout_gravity="center_horizontal" />
-
-        <Button
-            android:layout_height="wrap_content"
-            android:layout_width="wrap_content"
-            android:text="Submit"
-            android:id="@+id/submitbutton"
-            android:layout_gravity="center_horizontal" />
-    </LinearLayout>
 
 </LinearLayout>

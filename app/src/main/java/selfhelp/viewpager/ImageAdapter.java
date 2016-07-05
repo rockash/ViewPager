@@ -6,6 +6,8 @@ import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.location.LocationManager;
 import android.net.Uri;
 import android.provider.Settings;
@@ -43,7 +45,6 @@ public class ImageAdapter extends PagerAdapter {
     String uri = String.format(Locale.ENGLISH, "http://maps.google.com/maps?daddr=%f,%f (%s)", lat, lng, maplLabel);
     public static boolean gpsenabled =false;
 
-
     int[] mResources = {
             R.drawable.about_hospital_cr,
             R.drawable.howtoreach,
@@ -76,7 +77,7 @@ public class ImageAdapter extends PagerAdapter {
         //Log.d(TAG,"Layout inflator object created");
         View itemview = (View) mInflater.inflate(R.layout.pager_adapter_layout, collection, false);
         //Log.d(TAG,"view object created");
-        ImageView img = (ImageView) itemview.findViewById(R.id.imageView);
+        final ImageView img = (ImageView) itemview.findViewById(R.id.imageView);
         //Log.d(TAG,"imageview object created");
 
         if (position >= mResources.length) {
@@ -106,12 +107,12 @@ public class ImageAdapter extends PagerAdapter {
         });*/
         // Log.d("add images","added views to the container"+ position);
 
-        final int finalPosition = position;
         img.setOnClickListener(new View.OnClickListener() {
 
             @Override
             public void onClick(View arg0) {
-            /*    if(!sessionobject.isUserLoggedIn()){
+            /*
+            if(!sessionobject.isUserLoggedIn()){
                     // user is not logged in redirect him to Login Activity
                     Intent i = new Intent(context, testactivity.class);
                     // Closing all the Activities
@@ -121,16 +122,7 @@ public class ImageAdapter extends PagerAdapter {
                     // Staring Login Activity
                     context.startActivity(i);
                 }
-*/
 
-
-                   /*  BitmapFactory.Options options = new BitmapFactory.Options();
-                options.inSampleSize = 4;
-                Bitmap preview_bitmap = BitmapFactory.decodeResource(context.getResources(),(Integer) root.getTag(), options);
-
-                 */
-
-                /*
 
                 Toast.makeText(context, "opens activity for position"+pos, Toast.LENGTH_SHORT).show();
 
@@ -188,16 +180,22 @@ public class ImageAdapter extends PagerAdapter {
                             ((Activity)context).startActivity(intent);
                             break;
                         case 3:
+                                Toast.makeText(context,"try to click me, NOT !",Toast.LENGTH_SHORT).show();
                             break;
                         case 4:
+                            Toast.makeText(context,"try to click me, NOT !",Toast.LENGTH_SHORT).show();
                             break;
                         case 5:
+                            Toast.makeText(context,"try to click me, NOT !",Toast.LENGTH_SHORT).show();
                             break;
                         case 6:
+                            Toast.makeText(context,"try to click me, NOT !",Toast.LENGTH_SHORT).show();
                             break;
                         case 7:
+                            Toast.makeText(context,"try to click me, NOT !",Toast.LENGTH_SHORT).show();
                             break;
                         case 8:
+                            Toast.makeText(context,"try to click me, NOT !",Toast.LENGTH_SHORT).show();
                             break;
 
 
