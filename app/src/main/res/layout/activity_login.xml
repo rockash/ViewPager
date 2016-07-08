@@ -1,8 +1,8 @@
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:orientation="vertical"
+    android:background="@color/white"
     android:padding="10dip">
 
     <ImageView
@@ -11,14 +11,14 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:layout_marginRight="10dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="50dp"
         android:background="@drawable/logo" />
 
     <android.support.design.widget.TextInputLayout
 
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="6dp">
+        android:layout_marginTop="30dp">
 
 
         <EditText
@@ -26,8 +26,10 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:hint="Enter Username"
-            android:textColor="@android:color/white"
+            android:maxLines="1"
+            android:hint="@string/enterusername"
+            android:textColor="@android:color/black"
+            android:textColorHint="@color/green"
             />
     </android.support.design.widget.TextInputLayout>
 
@@ -42,10 +44,14 @@
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
             android:layout_marginBottom="10dp"
-            android:hint="Enter Password"
+            android:maxLines="1"
+            android:hint="@string/enterpassword"
             android:inputType="textPassword"
             android:singleLine="true"
-            android:textColor="@android:color/white" />
+            android:textColor="@android:color/black"
+            android:textColorHint="@color/green"
+
+            />
 
     </android.support.design.widget.TextInputLayout>
 
@@ -55,12 +61,16 @@
         android:layout_height="wrap_content"
         android:focusable="true"
         android:text="Login"
-        android:onClick="setBtnLogin"/>
+        android:layout_marginTop="40dp"
+        android:onClick="setBtnLogin"
+        android:background="@color/primary_text"/>
 
     <Button
         android:id="@+id/btnSignup"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
         android:text="Sign up"
-        android:onClick="setBtnSignup"/>
+        android:onClick="setBtnSignup"
+        android:layout_marginTop="10dp"
+        android:background="@color/primary_text"/>
 </LinearLayout>

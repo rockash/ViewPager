@@ -1,7 +1,5 @@
 package selfhelp.viewpager;
 
-import android.app.ActionBar;
-import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.ActivityNotFoundException;
 import android.content.Context;
@@ -27,7 +25,7 @@ import java.util.Locale;
 import selfhelp.viewpager.Fragment.about_hospital_frag;
 import selfhelp.viewpager.Fragment.pre_registration_frag;
 
-public class testactivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+public class FragmentActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
     Intent intent;
     float lat = 18.9591624f;
     float lng = 72.8199164f;
@@ -35,6 +33,10 @@ public class testactivity extends AppCompatActivity implements NavigationView.On
     String uri = String.format(Locale.ENGLISH, "http://maps.google.com/maps?daddr=%f,%f (%s)", lat, lng, maplLabel);
     DrawerLayout drawer;
     ActionBarDrawerToggle toggle;
+    String prev_title="";
+
+
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,7 +44,7 @@ public class testactivity extends AppCompatActivity implements NavigationView.On
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         if (toolbar != null) {
             setSupportActionBar(toolbar);
-            getSupportActionBar().setTitle(testactivity.this.getResources().getString(R.string.app_name));
+            getSupportActionBar().setTitle(FragmentActivity.this.getResources().getString(R.string.app_name));
         }
         drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         toggle = new ActionBarDrawerToggle(
@@ -81,9 +83,9 @@ public class testactivity extends AppCompatActivity implements NavigationView.On
 
             case 2:
             fragmentClass = new pre_registration_frag();
-                title = "Pre - Registration";
+            title = "Pre - Registration";
             break;
-            case R.id.how_to_reach:
+            case 1:
                 LocationManager manager = (LocationManager) getSystemService( Context.LOCATION_SERVICE );
                 if ( !manager.isProviderEnabled( LocationManager.GPS_PROVIDER ) ) {
                     ImageAdapter.gpsenabled = true;
@@ -96,10 +98,7 @@ public class testactivity extends AppCompatActivity implements NavigationView.On
                     Log.d("GPS ENABLED","gps enabled value after intent from imageadapter : "+ImageAdapter.gpsenabled);
                 }
 
-                String maplLabel = "HNH Directions";
-                intent = new Intent(android.content.Intent.ACTION_VIEW,
-                        Uri.parse("geo:0,0?q="+lat+","+lng+"&z=16 (" + maplLabel + ")"));
-                startActivity(intent);
+
                 break;
             case 0:
                 fragmentClass = new about_hospital_frag();
@@ -113,7 +112,9 @@ public class testactivity extends AppCompatActivity implements NavigationView.On
 
         try {
             fragment = fragmentClass;
+            prev_title = title;
             getSupportActionBar().setTitle(title);
+
             // change icon to arrow drawable
             getSupportActionBar().setHomeAsUpIndicator(R.drawable.ic_drawer);
             // Insert the fragment by replacing any existing fragment
@@ -127,6 +128,8 @@ public class testactivity extends AppCompatActivity implements NavigationView.On
     @Override
     protected void onResume() {
         super.onResume();
+        getSupportActionBar().setTitle(prev_title);
+
         LocationManager manager = (LocationManager) getSystemService( Context.LOCATION_SERVICE );
 
         Log.d("GPS ENABLED","gpsenabled value in onresume : "+ImageAdapter.gpsenabled);
@@ -169,9 +172,19 @@ public class testactivity extends AppCompatActivity implements NavigationView.On
                 break;
 
             case R.id.pre_registration:
-                fragmentClass = new pre_registration_frag();
-                title = "Pre - Registration";
-                break;
+                    ImageAdapter ia = new ImageAdapter(this);
+                if (!ia.sessionobject.isUserLoggedIn()) {
+                    Intent intent = new Intent(this, LoginActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                    intent.putExtra("from","2");
+                    startActivity(intent);
+                }
+                else {
+                    fragmentClass = new pre_registration_frag();
+
+                    title = "Pre - Registration";
+                }
+                    break;
 
             case R.id.find_a_doctor:
                 break;

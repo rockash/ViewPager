@@ -1,6 +1,5 @@
 package selfhelp.viewpager;
 
-import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -16,15 +15,10 @@ import android.widget.Toast;
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
 import java.io.OutputStream;
-import java.io.OutputStreamWriter;
 import java.io.UnsupportedEncodingException;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
 import java.net.URL;
-import java.net.URLConnection;
-import java.net.URLEncoder;
-import java.security.KeyManagementException;
-import java.security.NoSuchAlgorithmException;
 
 import javax.net.ssl.HttpsURLConnection;
 import javax.net.ssl.SSLContext;
@@ -62,10 +56,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         txtusername = (EditText) findViewById(R.id.txtUsername);
         txtPassword = (EditText) findViewById(R.id.txtPassword);
 
+        /*
         Toast.makeText(getApplicationContext(),
                 "User Login Status: " + session.isUserLoggedIn(),
                 Toast.LENGTH_LONG).show();
-
+        */
 
         // User Login button
         btnLogin = (Button) findViewById(R.id.btnLogin);
@@ -105,6 +100,7 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
 
     }
 
+
     private void setBtnLogin(){
         // Get username, password from EditText
         String username = txtusername.getText().toString();
@@ -122,13 +118,25 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
         new getcanlogin().execute();
 
 
-        if ((username.equals("9167034191") && password.equals("1234") || authenticationcheck.contains("P100"))) {
+        if ((username.equals("1") && password.equals("") || authenticationcheck.contains("P100"))) {
 
             // Creating user login session
             // Statically storing name="Android Example"
             // and email="androidexample84@gmail.com"
             session.createUserLoginSession(username, password);
+            String type=getIntent().getExtras().getString("from");
+            //custom constructor intent recogniser
+            Integer position = Integer.parseInt(type);
 
+            if((position == 1) || (position == 2) || (position == 0))
+            {
+                Intent intent;
+                intent = new Intent(this, FragmentActivity.class);
+                intent.putExtra("from", ""+position);
+                startActivity(intent);
+                finish();
+            }
+            else {
             // Starting MainActivity
             Intent i = new Intent(LoginActivity.this, MainActivity.class);
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
@@ -137,7 +145,11 @@ public class LoginActivity extends AppCompatActivity implements View.OnClickList
             i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
             startActivity(i);
             finish();
+            }
 
+        }
+        else{
+            Toast.makeText(LoginActivity.this, "Please check for incorrect username,password", Toast.LENGTH_SHORT).show();
         }
 
     }

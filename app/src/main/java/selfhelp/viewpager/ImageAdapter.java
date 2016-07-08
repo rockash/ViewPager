@@ -6,11 +6,8 @@ import android.content.ActivityNotFoundException;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
 import android.location.LocationManager;
 import android.net.Uri;
-import android.provider.Settings;
 import android.support.v4.view.PagerAdapter;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -22,8 +19,6 @@ import android.widget.Toast;
 
 import java.util.Locale;
 
-import static android.support.v4.app.ActivityCompat.startActivity;
-
 
 /**
  * Created by Ashwin Pillai on 6/10/2016.
@@ -32,7 +27,7 @@ import static android.support.v4.app.ActivityCompat.startActivity;
 
 public class ImageAdapter extends PagerAdapter {
 
-    UserSessionManager sessionobject;
+    static UserSessionManager sessionobject;
     Context context;
     private static final String TAG = "ImageAdapter";
     private static final boolean DEBUG = false;
@@ -114,7 +109,7 @@ public class ImageAdapter extends PagerAdapter {
             /*
             if(!sessionobject.isUserLoggedIn()){
                     // user is not logged in redirect him to Login Activity
-                    Intent i = new Intent(context, testactivity.class);
+                    Intent i = new Intent(context, FragmentActivity.class);
                     // Closing all the Activities
                     i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
                     // Add new Flag to start new Activity
@@ -137,20 +132,20 @@ public class ImageAdapter extends PagerAdapter {
 
                 */
 
-                //if else cases for if user logged in and needs login page redirect
-                if (!sessionobject.isUserLoggedIn()) {
-                    Intent intent = new Intent(context, LoginActivity.class);
-                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                    context.startActivity(intent);
-                } else {
+
+
+                    //if else cases for if user logged in and needs login page redirect
+
+
+
                     switch (pos) {
                         //TODO      cover all cases
                         case 0:
 
-                            intent = new Intent(context, testactivity.class);
+                            intent = new Intent(context, FragmentActivity.class);
                             intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
                             intent.putExtra("from", ""+pos);
-                            //custom constructor variable pass to testactivity
+                            //custom constructor variable pass to FragmentActivity
                             //intent.putExtra("POSITION",0);
                             context.startActivity(intent);
 
@@ -172,12 +167,20 @@ public class ImageAdapter extends PagerAdapter {
 
                             break;
                         case 2:
-                            intent = new Intent(context, testactivity.class);
-                            intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
-                            intent.putExtra("from", ""+pos);
-                            //custom constructor variable pass to testactivity
-                            //intent.putExtra("POSITION",0);
-                            ((Activity)context).startActivity(intent);
+                            if (!sessionobject.isUserLoggedIn()) {
+                                Intent intent = new Intent(context, LoginActivity.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                intent.putExtra("from", ""+pos);
+                                context.startActivity(intent);
+                            }
+                            else {
+                                intent = new Intent(context, FragmentActivity.class);
+                                intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+                                intent.putExtra("from", "" + pos);
+                                //custom constructor variable pass to FragmentActivity
+                                //intent.putExtra("POSITION",0);
+                                ((Activity) context).startActivity(intent);
+                            }
                             break;
                         case 3:
                                 Toast.makeText(context,"try to click me, NOT !",Toast.LENGTH_SHORT).show();
@@ -200,7 +203,7 @@ public class ImageAdapter extends PagerAdapter {
 
 
                     }
-                }
+
             }
 
         });
